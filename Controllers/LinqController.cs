@@ -8,7 +8,7 @@ namespace asp_dotnet8_core_web_api_linq_practice.Controllers
     [ApiController]
     public class LinqController : ControllerBase
     {
-        private readonly List<Models.Product> products = new List<Product>
+        private readonly List<Product> products = new List<Product>
         {
             new Product { Id = 1, Name = "Laptop", Price = 1200.00M, Category = "Electronics" },
             new Product { Id = 2, Name = "Smartphone", Price = 800.00M, Category = "Electronics" },
@@ -44,6 +44,14 @@ namespace asp_dotnet8_core_web_api_linq_practice.Controllers
         public ActionResult<IEnumerable<Product>> GetProductsOrderedByPrice()
         {
             var orderedProducts = products.OrderBy(p => p.Price).ToList();
+            return Ok(orderedProducts);
+        }
+
+        // Get products ordered by price desc
+        [HttpGet("orderbypricedesc")]
+        public ActionResult<IEnumerable<Product>> GetProductsOrderedByPriceDesc()
+        {
+            var orderedProducts = products.OrderByDescending(p => p.Price).ToList();
             return Ok(orderedProducts);
         }
 
